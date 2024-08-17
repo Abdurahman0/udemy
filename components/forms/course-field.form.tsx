@@ -363,7 +363,7 @@ function CourseFieldsForm() {
 							src={previewImage}
 							alt='preview-image'
 							fill
-							className='object-cover pt-2'
+							className='object-cover'
 						/>
 					</div>
 					<Button

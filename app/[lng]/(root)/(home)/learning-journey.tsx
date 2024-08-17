@@ -8,7 +8,7 @@ function LearningJourney() {
 	const t = useTranslate()
 	return (
 		<div className='container mx-auto max-w-6xl py-24'>
-			<h1 className='font-space_grotesk text-center text-2xl font-bold'>
+			<h1 className='text-center font-space_grotesk text-2xl font-bold'>
 				{t('learnJourney')}
 			</h1>
 			<p className='mx-auto max-w-4xl text-center text-sm text-muted-foreground'>

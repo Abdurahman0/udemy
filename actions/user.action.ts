@@ -1,6 +1,6 @@
 'use server'
 
-import { connectToDatabase } from '@/lib/mogoose'
+import { connectToDatabase } from '@/lib/mongoose'
 import { ICreateUser, IUpdateUser } from './types'
 import User from '@/database/user.model'
 
@@ -35,7 +35,6 @@ export const updateUser = async (data: IUpdateUser) => {
 		const updateduser = await User.findOneAndUpdate({ clerkId }, updatedData, {
 			new: true,
 		})
-
 		return updateduser
 	} catch (error) {
 		throw new Error('Error updating user. Please try again.')

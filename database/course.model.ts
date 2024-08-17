@@ -1,4 +1,4 @@
-import { model, models, Schema } from 'mongoose'
+import { Schema, model, models } from 'mongoose'
 
 const CourseSchema = new Schema(
 	{
@@ -6,8 +6,9 @@ const CourseSchema = new Schema(
 		description: String,
 		learning: String,
 		requirements: String,
-		category: String,
-		labguage: String,
+		level: String,
+		cateogry: String,
+		language: String,
 		oldPrice: Number,
 		currentPrice: Number,
 		previewImage: String,
