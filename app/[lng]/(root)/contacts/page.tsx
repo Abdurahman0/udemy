@@ -12,7 +12,7 @@ async function Page({ params: { lng } }: LngParams) {
 			<iframe
 				src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5691.7340158970965!2d69.34370890259747!3d41.373910252767466!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38aef39767a07f0b%3A0xf97b2737b4611084!2sKafe%20Charkhpalak!5e1!3m2!1sen!2s!4v1723838831876!5m2!1sen!2s'
 				loading='lazy'
-				className='w-full h-96'
+				className='h-96 w-full'
 			/>
 
 			<div className='container mx-auto max-w-6xl'>

@@ -55,7 +55,7 @@ function FeaturedCourses() {
 
 			<Carousel
 				opts={{ align: 'start' }}
-				className='hidden mt-6 md:flex w-full'
+				className='mt-6 hidden w-full md:flex'
 			>
 				<CarouselContent>
 					{courses.map(course => (

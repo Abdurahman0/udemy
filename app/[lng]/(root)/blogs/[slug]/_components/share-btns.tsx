@@ -16,7 +16,7 @@ function ShareBtns() {
 	}
 
 	return (
-		<div className='flex flex-col max-md:flex-row md:space-y-3 max-md:space-x-3 mt-4'>
+		<div className='mt-4 flex flex-col max-md:flex-row max-md:space-x-3 md:space-y-3'>
 			<Button size={'icon'} variant={'outline'}>
 				<Twitter />
 			</Button>

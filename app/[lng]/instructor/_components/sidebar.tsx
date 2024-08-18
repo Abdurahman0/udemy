@@ -9,13 +9,13 @@ function Sidebar() {
 	const pathname = usePathname()
 
 	return (
-		<div className='fixed mt-[10vh] h-[90vh] w-[300px] inset-0'>
+		<div className='fixed inset-0 mt-[10vh] h-[90vh] w-[300px]'>
 			<div className='container mt-6'>
 				<div className='flex flex-col space-y-3'>
 					{instructorNavLinks.map(item => (
 						<Link key={item.route} href={item.route}>
 							<Button
-								className='w-full flex justify-start gap-2'
+								className='flex w-full justify-start gap-2'
 								variant={
 									pathname.slice(3) === item.route ? 'secondary' : 'ghost'
 								}

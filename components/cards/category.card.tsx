@@ -12,7 +12,7 @@ function CategoryCard(category: ICategory) {
 					height={100}
 				/>
 			</div>
-			<h2 className='font-space_grotesk mt-2 line-clamp-1 text-lg'>
+			<h2 className='mt-2 line-clamp-1 font-space_grotesk text-lg'>
 				{category.label}
 			</h2>
 		</div>
