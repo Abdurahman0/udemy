@@ -1,5 +1,7 @@
 import {
+	Bell,
 	Contact,
+	CreditCard,
 	FileCode,
 	GaugeCircle,
 	Home,
@@ -8,6 +10,7 @@ import {
 	MonitorPlay,
 	Rss,
 	Settings2,
+	User,
 } from 'lucide-react'
 import {
 	DiCisco,
@@ -57,9 +60,9 @@ export const companies = [
 
 export const filterCourses = [
 	{ label: 'cateogry1', name: 'all' },
-	{ label: 'cateogry2', name: 'trending' },
-	{ label: 'cateogry3', name: 'popular' },
-	{ label: 'cateogry4', name: 'featured' },
+	{ label: 'cateogry2', name: 'newest' },
+	{ label: 'cateogry3', name: 'lowest-price' },
+	{ label: 'cateogry4', name: 'highest-price' },
 ]
 
 export const filterLevels = [
@@ -217,36 +220,7 @@ export const learningJourney = [
 	},
 ]
 
-export const instructorNavLinks = [
-	{
-		label: 'Dashboard',
-		route: '/instructor',
-		icon: GaugeCircle,
-	},
-	{
-		label: 'My Courses',
-		route: '/instructor/my-courses',
-		icon: MonitorPlay,
-	},
-	{
-		label: 'Create Course',
-		route: '/instructor/create-course',
-		icon: FileCode,
-	},
-	{
-		label: 'Reviews',
-		route: '/instructor/reviews',
-		icon: MessageSquareMore,
-	},
-	{
-		label: 'Settings',
-		route: '/instructor/settings',
-		icon: Settings2,
-	},
-]
-
 export const courseLevels = ['beginner', 'intermediate', 'advanced']
-
 export const courseCategory = [
 	'front-end',
 	'back-end',
@@ -255,5 +229,74 @@ export const courseCategory = [
 	'desktop',
 	'game',
 ]
-
 export const courseLanguage = ['english', 'uzbek', 'russian', 'turkish']
+
+export const editorConfig = {
+	height: 150,
+	menubar: false,
+	plugins: [
+		'advlist',
+		'autolink',
+		'lists',
+		'link',
+		'image',
+		'charmap',
+		'preview',
+		'anchor',
+		'searchreplace',
+		'visualblocks',
+		'codesample',
+		'fullscreen',
+		'insertdatetime',
+		'media',
+		'table',
+	],
+	toolbar: 'link |' + 'bullist numlist',
+	content_style: 'body { font-family:Inter; font-size:16px }',
+	skin: 'oxide-dark',
+	content_css: 'dark',
+}
+
+export const instructorNavLinks = [
+	{ label: 'Dashboard', route: '/instructor', icon: GaugeCircle },
+	{ label: 'My Courses', route: '/instructor/my-courses', icon: MonitorPlay },
+	{
+		label: 'Create Course',
+		route: '/instructor/create-course',
+		icon: FileCode,
+	},
+	{ label: 'Reviews', route: '/instructor/reviews', icon: MessageSquareMore },
+	{ label: 'Settings', route: '/instructor/settings', icon: Settings2 },
+]
+
+export const profileNavLinks = [
+	{ label: 'dashboard', route: '/profile', icon: GaugeCircle },
+	{ label: 'myCourses', route: '/profile/my-courses', icon: MonitorPlay },
+	{ label: 'wishlist', route: '/profile/wishlist', icon: ListVideo },
+	{ label: 'creditCards', route: '/profile/credit-cards', icon: CreditCard },
+	{ label: 'reviews', route: '/profile/reviews', icon: MessageSquareMore },
+	{ label: 'notification', route: '/profile/notifications', icon: Bell },
+	{ label: 'settings', route: '/profile/settings', icon: Settings2 },
+]
+
+export const adminNavLinks = [
+	{ label: 'Dashboard', route: '/admin', icon: GaugeCircle },
+	{ label: 'All courses', route: '/admin/all-courses', icon: MonitorPlay },
+	{ label: 'Instructors', route: '/admin/instructors', icon: User },
+	{ label: 'Reviews', route: '/admin/reviews', icon: MessageSquareMore },
+	{ label: 'Notifications', route: '/admin/notifications', icon: Bell },
+]
+
+export const amountOptions = [
+	{ value: '1', label: 'photo' },
+	{ value: '2', label: 'photos' },
+	{ value: '3', label: 'photos' },
+	{ value: '4', label: 'photos' },
+	{ value: '5', label: 'photos' },
+]
+
+export const resolutionOptions = [
+	{ value: '256x256', label: '256x256' },
+	{ value: '512x512', label: '512x512' },
+	{ value: '1024x1024', label: '1024x1024' },
+]
