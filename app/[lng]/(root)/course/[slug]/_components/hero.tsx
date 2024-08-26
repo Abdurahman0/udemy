@@ -18,28 +18,32 @@ function Hero(course: ICourse) {
 			<p className='mt-4 text-muted-foreground'>{course.description}</p>
 
 			<div className='mt-4 flex flex-wrap items-center gap-6'>
-				<div className='flex items-center gap-2'>
-					<Image
-						width={50}
-						height={50}
-						alt={course.instructor.fullName}
-						src={course.instructor.picture}
-						className='rounded-full'
-					/>
-					<p className='font-space_grotesk font-bold'>
-						{course.instructor.fullName}
-					</p>
-				</div>
+				{course.instructor && (
+					<div className='flex items-center gap-2'>
+						<Image
+							width={50}
+							height={50}
+							alt={course.instructor.fullName || 'Instructor'}
+							src={course.instructor.picture || '/default-avatar.png'}
+							className='rounded-full'
+						/>
+						<p className='font-space_grotesk font-bold'>
+							{course.instructor.fullName}
+						</p>
+					</div>
+				)}
 
 				<div className='flex items-center gap-2 font-space_grotesk'>
-					<p className='font-bold text-[#E59819]'>4.5</p>
-					<ReactStars value={4.5} edit={false} color2='#E59819' />
-					<p className='font-bold'>(199)</p>
+					<p className='font-bold text-[#E59819]'>{course.rating}</p>
+					<ReactStars value={course.rating} edit={false} color2='#E59819' />
+					<p className='font-bold'>({course.reviewCount})</p>
 				</div>
 
 				<div className='flex items-center gap-2'>
 					<PiStudentBold className='size-6' />
-					<p className='font-space_grotesk font-bold'>80 {t('students')}</p>
+					<p className='font-space_grotesk font-bold'>
+						{course.purchasedStudents} {t('students')}
+					</p>
 				</div>
 
 				<div className='flex items-center gap-2'>

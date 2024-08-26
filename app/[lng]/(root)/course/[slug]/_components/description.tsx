@@ -12,9 +12,47 @@ import {
 } from 'lucide-react'
 import { GrCertificate } from 'react-icons/gr'
 import { BiCategory } from 'react-icons/bi'
+import { useState } from 'react'
+import { useAuth } from '@clerk/nextjs'
+import { useRouter } from 'next/navigation'
+import { useCart } from '@/hooks/use-cart'
+import Link from 'next/link'
+import { toast } from 'sonner'
+import { addWishListCourse } from '@/actions/course.action'
 
-function Description(course: ICourse) {
+interface Props {
+	course: ICourse
+	isPurchase: boolean
+}
+
+function Description({ course, isPurchase }: Props) {
+	const [isloading, setIsLoading] = useState(false)
+
+	const { userId } = useAuth()
 	const t = useTranslate()
+	const router = useRouter()
+	const { addToCart } = useCart()
+
+	const onCart = () => {
+		setIsLoading(true)
+		addToCart(course)
+		router.push('/shopping/cart')
+	}
+
+	const onAdd = () => {
+		if (!userId) return toast.error('Please Sign Up!')
+		setIsLoading(true)
+
+		const promise = addWishListCourse(course._id, userId).finally(() =>
+			setIsLoading(false)
+		)
+
+		toast.promise(promise, {
+			loading: t('loading'),
+			success: t('successfully'),
+			error: `${t('alreadyAdded')} Wishlist`,
+		})
+	}
 
 	return (
 		<div className='rounded-md border bg-secondary/50 p-4 shadow-lg dark:shadow-white/20 lg:sticky lg:top-24 lg:p-6'>
@@ -33,11 +71,29 @@ function Description(course: ICourse) {
 				</div>
 			</div>
 
-			<Button size={'lg'} className='mt-4 w-full font-bold'>
-				{t('addToCart')}
-			</Button>
-			<Button size={'lg'} className='mt-2 w-full font-bold' variant={'outline'}>
-				{t('buyNow')}
+			{isPurchase ? (
+				<Button size={'lg'} className='relative mt-2 w-full font-bold' asChild>
+					<Link href={`/dashboard/${course._id}`}>{t('toLesson')}</Link>
+				</Button>
+			) : (
+				<Button
+					size={'lg'}
+					className='relative mt-2 w-full font-bold'
+					onClick={onCart}
+					disabled={isloading}
+				>
+					{t('buyNow')}
+				</Button>
+			)}
+
+			<Button
+				size={'lg'}
+				className='relative mt-2 w-full font-bold'
+				variant={'outline'}
+				disabled={isloading}
+				onClick={onAdd}
+			>
+				{t('addWishlist')}
 			</Button>
 
 			<p className='my-3 text-center text-sm text-muted-foreground'>

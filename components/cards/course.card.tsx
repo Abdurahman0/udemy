@@ -23,15 +23,19 @@ function CourseCard(course: ICourse) {
 					<Separator />
 					<div className='flex items-center justify-between'>
 						<div className='flex items-center gap-2'>
-							<Image
-								src={course.instructor.picture}
-								alt={course.instructor.fullName}
-								width={40}
-								height={40}
-								className='rounded-full object-cover'
-							/>
+							{course.instructor && course.instructor.picture ? (
+								<Image
+									src={course.instructor.picture}
+									alt={course.instructor.fullName || 'Instructor'}
+									width={40}
+									height={40}
+									className='rounded-full object-cover'
+								/>
+							) : (
+								<div className='size-10 rounded-full bg-gray-200'></div> // Placeholder for missing picture
+							)}
 							<p className='text-sm text-muted-foreground'>
-								{course.instructor.fullName}
+								{course.instructor?.fullName || 'Instructor Name'}
 							</p>
 						</div>
 
@@ -44,8 +48,8 @@ function CourseCard(course: ICourse) {
 							</div>
 							<div className='font-space_grotesk text-sm font-bold'>
 								{course.currentPrice.toLocaleString('en-US', {
-									style: 'currency',
 									currency: 'USD',
+									style: 'currency',
 								})}
 							</div>
 						</div>

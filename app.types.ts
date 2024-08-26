@@ -19,6 +19,9 @@ export interface ICourse {
 	totalLessons: number
 	totalSections: number
 	totalDuration: string
+	rating: number
+	reviewCount: number
+	purchasedStudents: number
 }
 
 export interface ISection {
@@ -41,6 +44,13 @@ export interface ILesson {
 		minutes: number
 		seconds: number
 	}
+	userProgress: IUserProgress[]
+}
+
+export interface IUserProgress {
+	userId: string
+	lessonId: string
+	isCompleted: string
 }
 
 export interface IUser {
@@ -58,6 +68,52 @@ export interface IUser {
 	github: string
 	youtube: string
 }
+
 export interface SearchParamsProps {
 	searchParams: { [key: string]: string | undefined }
+}
+
+export interface IReview {
+	data: string
+	rating: number
+	user: IUser
+	createdAt: string
+	_id: string
+	course: ICourse
+	isFlag: boolean
+}
+
+export interface ICard {
+	id: string
+	billing_details: {
+		address: {
+			city: string
+			country: string
+			line1: string
+			line2: string
+			postal_code: string
+			state: string
+		}
+		name: string
+	}
+	card: {
+		brand: string
+		exp_month: number
+		exp_year: number
+		last4: string
+	}
+}
+
+export interface IPayment {
+	id: string
+	metadata: { orderId: string }
+	created: number
+	amount: number
+	status: string
+	payment_method: {
+		card: {
+			brand: string
+			last4: string
+		}
+	}
 }

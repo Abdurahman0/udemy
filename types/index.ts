@@ -1,3 +1,4 @@
+/* eslint-disable no-use-before-define */
 import { ReactNode } from 'react'
 
 export interface ChildProps {

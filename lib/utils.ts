@@ -4,6 +4,7 @@ import { enUS, ruRU, trTR } from '@clerk/localizations'
 import { uzUZ } from './uz-UZ'
 import qs from 'query-string'
 import { ILesson } from '@/app.types'
+import { enUS as en, uz, tr, ru } from 'date-fns/locale'
 
 export function cn(...inputs: ClassValue[]) {
 	return twMerge(clsx(inputs))
@@ -141,4 +142,31 @@ export const formatLessonTime = (lesson: ILesson) => {
 	}${seconds.toString().padStart(2, '0')}`
 
 	return formattedTime
+}
+
+export const formatAndDivideNumber = (num: number) => {
+	if (num >= 1000000) {
+		const formattedNum = (num / 1000000).toFixed(1)
+		return `${formattedNum}M`
+	} else if (num >= 1000) {
+		const formattedNum = (num / 1000).toFixed(1)
+		return `${formattedNum}K`
+	} else {
+		return num.toString()
+	}
+}
+
+export const getTimeLocale = (lng: string) => {
+	if (lng === 'en') return en
+	if (lng === 'ru') return ru
+	if (lng === 'tr') return tr
+	if (lng === 'uz') return uz
+}
+
+export const generateNumericId = (): string => {
+	let id = ''
+	for (let i = 0; i < 4; i++) {
+		id += Math.floor(Math.random() * 10).toString()
+	}
+	return id
 }

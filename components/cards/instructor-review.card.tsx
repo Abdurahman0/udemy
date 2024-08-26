@@ -2,39 +2,86 @@
 
 import { Flag } from 'lucide-react'
 import { Button } from '../ui/button'
-import { Avatar, AvatarFallback } from '../ui/avatar'
+import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar'
 import ReactStars from 'react-stars'
+import { IReview } from '@/app.types'
+import { formatDistanceToNow } from 'date-fns'
+import { cn } from '@/lib/utils'
+import { useState } from 'react'
+import { usePathname } from 'next/navigation'
+import { setFlag } from '@/actions/review.action'
+import { toast } from 'sonner'
+import FillLoading from '../shared/fill-loading'
+import { FaTimes, FaCheck } from 'react-icons/fa'
 
-function InstructorReviewCard() {
+interface Props {
+	review: IReview
+	isProfile?: boolean
+}
+
+function InstructorReviewCard({ review, isProfile }: Props) {
+	const [isLoading, setIsLoading] = useState(false)
+	const pathname = usePathname()
+
+	const handleFlag = async () => {
+		setIsLoading(true)
+		const promise = setFlag(review._id, !review.isFlag, pathname).finally(() =>
+			setIsLoading(false)
+		)
+
+		toast.promise(promise, {
+			loading: 'Loading...',
+			success: 'Review flagged successfully',
+			error: 'Error flagging review',
+		})
+	}
+
 	return (
-		<div className='flex gap-4 border-b pb-4'>
+		<div className='relative flex gap-4 border-b pb-4'>
+			{isLoading && <FillLoading />}
 			<div className='flex-1'>
 				<div className='flex gap-3'>
 					<Avatar>
-						<AvatarFallback className='uppercase'>SB</AvatarFallback>
+						<AvatarImage src={review.user.picture} />
+						<AvatarFallback className='uppercase'>
+							{review.user.fullName[0]}
+						</AvatarFallback>
 					</Avatar>
 
 					<div className='flex flex-col'>
 						<div className='font-space_grotesk text-sm'>
-							Samar Badriddinov{' '}
-							<span className='text-xs text-muted-foreground'>3 Days ago</span>
+							{review.user.fullName}{' '}
+							<span className='text-xs text-muted-foreground'>
+								{formatDistanceToNow(new Date(review.createdAt))} ago
+							</span>
 						</div>
-						<ReactStars value={4.5} edit={false} color2='#E59819' />
+						<ReactStars value={review.rating} edit={false} color2='#E59819' />
 						<div className='font-space_grotesk font-bold'>
-							Full Course ReactJS
+							{review.course.title}
 						</div>
-						<p className='text-sm text-muted-foreground'>
-							Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae
-							mollitia odit hic fugit unde qui vero perferendis labore iure
-							similique dolorem dolorum vel ullam nobis voluptatum animi ad,
-							reprehenderit praesentium!
-						</p>
+						<p className='text-sm text-muted-foreground'>{review.data}</p>
 					</div>
 				</div>
 			</div>
-			<Button size={'icon'} variant={'ghost'} className='self-start'>
-				<Flag className='text-muted-foreground' />
-			</Button>
+			{isProfile ? (
+				<Button size={'icon'} variant={'ghost'} className='self-start'>
+					{review.isFlag ? (
+						<FaTimes className='text-red-500' />
+					) : (
+						<FaCheck className='text-green-500' />
+					)}
+				</Button>
+			) : (
+				<Button size={'icon'} variant={'ghost'} className='self-start'>
+					<Flag
+						className={cn(
+							'text-muted-foreground',
+							review.isFlag && 'fill-white'
+						)}
+						onClick={handleFlag}
+					/>
+				</Button>
+			)}
 		</div>
 	)
 }
