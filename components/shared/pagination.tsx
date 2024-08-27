@@ -8,7 +8,6 @@ interface Props {
 	pageNumber: number
 	isNext: boolean
 }
-
 function Pagination({ isNext, pageNumber }: Props) {
 	const router = useRouter()
 	const searchParams = useSearchParams()
@@ -37,7 +36,7 @@ function Pagination({ isNext, pageNumber }: Props) {
 			>
 				Prev
 			</Button>
-			<div className='flex items-center justify-center rounded-md px-3.5 py-2'>
+			<div className='flex items-center justify-center rounded-md px-3.5 py-2 font-space_grotesk'>
 				{pageNumber}
 			</div>
 			<Button
