@@ -35,9 +35,18 @@ export const updateUser = async (data: IUpdateUser) => {
 	try {
 		await connectToDatabase()
 		const { clerkId, updatedData, path } = data
-		const updateduser = await User.findOneAndUpdate({ clerkId }, updatedData)
-		if (path) return revalidatePath(path)
-		return updateduser
+
+		// Find and update the user, then convert to a plain object
+		const updatedUser = await User.findOneAndUpdate({ clerkId }, updatedData, {
+			new: true, // To return the updated document
+			lean: true, // To ensure the result is a plain object
+		})
+
+		if (path) {
+			revalidatePath(path) // Make sure this function is also serializable
+		}
+
+		return updatedUser // Return a plain object
 	} catch (error) {
 		throw new Error('Error updating user. Please try again.')
 	}
