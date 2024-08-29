@@ -10,7 +10,6 @@ export default function Page() {
 		<SignUp
 			appearance={{ baseTheme: resolvedTheme === 'dark' ? dark : undefined }}
 			path='/:lng/sign-up'
-			afterSignInUrl={'/:lng/'}
 			afterSignUpUrl={'/:lng/'}
 		/>
 	)
