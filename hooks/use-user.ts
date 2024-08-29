@@ -14,8 +14,7 @@ const useUser = () => {
 		const getData = async () => {
 			try {
 				const data = await getUser(userId!)
-				data === 'notFound' && onOpen()
-				setUser(data)
+				data === 'notFound' ? onOpen() : setUser(data)
 			} catch (error) {
 				setUser(null)
 			}
